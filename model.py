@@ -1,5 +1,6 @@
-from peewee import SqliteDatabase,Model, AutoField, TextField, CharField
 import sqlite3
+
+
 db = 'animals.db'
 
 def creation_db(db=db):
@@ -19,22 +20,12 @@ def add_to_db(data, db=db):
     conn.commit()
     conn.close()
 
+def select_from_db(db=db):
+    conn = sqlite3.connect(db)
+    cursor = conn.cursor()
+    cursor.execute("SELECT animalname FROM animals")
+    result = cursor.fetchall()
+    conn.close()
+    return result
 
-#
-# animals = SqliteDatabase('animals.db')
-#
-# class BaseModel(Model):
-#     class Meta:
-#         database = animals
-#
-# class Animals(BaseModel):
-#     artist_id = AutoField(column_name='animal_id')
-#     name = TextField(column_name='Name', null=True)
-#     letter = CharField(max_length=1)
-#
-#     class Meta:
-#         table_name = 'Animals'
-#
-# cursor = animals.cursor()
-#
-# animals.close()
+
