@@ -1,12 +1,12 @@
 import sqlite3
 
+db = 'task_2/animals.db'
 
-db = 'animals.db'
 
 def creation_db(db=db):
     conn = sqlite3.connect(db)
-    cur = conn.cursor()
-    cur.execute("""
+    conn.execute('DROP TABLE IF EXISTS animals;')
+    conn.execute("""
     CREATE TABLE IF NOT EXISTS animals(
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         animalname VARCHAR(255));
@@ -20,6 +20,7 @@ def add_to_db(data, db=db):
     conn.commit()
     conn.close()
 
+
 def select_from_db(db=db):
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
@@ -29,3 +30,10 @@ def select_from_db(db=db):
     return result
 
 
+if __name__ == '__main__':
+    '''
+    Внимание: запуск этого метода очистит БД!
+    '''
+    confirm = input('Подтвердите действие, введите 1 для продолжения: ')
+    if confirm == '1':
+        creation_db(db)

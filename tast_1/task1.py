@@ -1,5 +1,5 @@
 def task(array):
-    return 'OUT: '+str(array.index('0'))
+    return 'OUT: ' + str(array.index('0'))
 
 
 data = '111111111111111111111111100000000'
